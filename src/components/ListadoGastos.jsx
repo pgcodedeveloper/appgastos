@@ -7,7 +7,7 @@ const ListadoGastos = ({gastos,setGastoEditar,eliminarGasto,gastosFiltro,filtro}
       {
         filtro ? (
           <>
-            <h2 className='texto-centrado'>{gastosFiltro.length ? 'Descripción de los Gastos' : 'Aún no hay gastos en esta categoría, agregue uno'}</h2>
+            <h2 className='texto-centrado'>{gastosFiltro.length ? 'Descripción de los Gastos (< Deslize para modificar >)' : 'Aún no hay gastos en esta categoría, agregue uno'}</h2>
             {
               gastosFiltro.map( gasto =>(
                 <Gasto 
