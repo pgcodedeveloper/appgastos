@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "formik": "^2.2.9",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
@@ -17,7 +19,8 @@
     "react-dom": "^18.2.0",
     "react-swipeable-list": "^1.5.1",
     "sweetalert2": "^11.4.23",
-    "sweetalert2-react-content": "^5.0.1"
+    "sweetalert2-react-content": "^5.0.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

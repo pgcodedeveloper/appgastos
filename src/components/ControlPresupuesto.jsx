@@ -5,7 +5,7 @@ import swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css';
 import IconoReset from '../img/reset.png';
 
-const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsValidPresupuesto}) => {
+const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsValidPresupuesto,setLogin}) => {
 
     const [porcentaje,setPorcentaje] = useState(0);
     const [disponible,setDisponible] = useState(0);
@@ -23,19 +23,14 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsVa
             setPorcentaje(nuevoPorcentaje);
         }, 1000);
         setDeficit(totaldeficit);
-        
-
-        
     },[gastos,presupuesto])
+
     const formatoCantidad = (cantidad) =>{
         return cantidad.toLocaleString('en-US',{
             style: 'currency',
             currency: 'USD'
         })
     }
-
-
-    
 
     const handleResetApp= () => {
         swal.fire({
@@ -50,6 +45,22 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsVa
             if (res.isConfirmed) {
                 setGastos([]);
                 setPresupuesto(0);
+                location.reload();
+            }
+        });
+    }
+    const handleCerrar= () =>{
+        swal.fire({
+            title: '¿Desea Cerrar Sesión?',
+            text: "Elige una opción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, claro!',
+        }).then((res) => {
+            if (res.isConfirmed) {
+                setLogin(false);
                 location.reload();
             }
         });
@@ -72,6 +83,10 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsVa
                 </CircularProgressbar>
             </div>
             <div className='contenido-presupuesto'>
+                <button className='cerrar-app' onClick={handleCerrar} type="button">
+                    Cerrar Sesión
+                    <img src={IconoReset} alt="Icono de reiniciar"/>
+                </button>
                 <button className='reset-app' onClick={handleResetApp} type="button">
                     Reiniciar Presupuesto
                     <img src={IconoReset} alt="Icono de reiniciar"/>

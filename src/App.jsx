@@ -12,6 +12,8 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import IconoGastoNuevo from './img/nuevo-gasto.svg'
 import IconoMas from './img/masdinero.png';
 import IconoDescarga from './img/pdf.png';
+import IconoPG from './img/LogoPG.png'
+import InicioSesion from './components/InicioSesion';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
   const [gastoEditar,setGastoEditar] = useState({});
   const [filtro,setFiltro] = useState('');
   const [gastosFiltro, setGastoFiltro] = useState([]);
+  const datosLogin= localStorage.getItem('login');
+  const [login, setLogin] = useState(datosLogin ?? false);
 
   useEffect( () =>{
     if(Object.keys(gastoEditar).length > 0){
@@ -54,6 +58,9 @@ function App() {
     }
   },[filtro,gastos]);
 
+  useEffect(() =>{
+    localStorage.setItem('login', login ?? false); 
+  },[login])
   useEffect( () => {
     const presupuestoLS= Number(localStorage.getItem('presupuesto')) ?? 0;
 
@@ -65,7 +72,7 @@ function App() {
   const handleNuevoGasto = () =>{
     setModal(true);
     setGastoEditar({});
-
+    
     setTimeout(() => {
       setAnimarModal(true);
     }, 300);
@@ -192,13 +199,28 @@ function App() {
             },
             tableLineColor: [0, 0, 0]
           });
-          const colums = ["Nombre del Gasto","Precio del Gasto","Categoría del Gasto"];
+          
+          doc.setFontSize(12);
+          doc.setTextColor(86, 144, 171);
+          doc.text('LISTA DE GASTOS',40, 140,"left","upercase");
+
+          const colums = ["Nombre del Gasto","Precio del Gasto","Categoría del Gasto","Fecha del Gasto"];
           const rows= [];
-          gastos.map(item=> rows.push(Object.values(item)));
+          let gasto = [];
+          gastos.map(gas =>{
+            const {categoria,nombre,cantidad,fecha} = gas;
+            gasto = [
+              nombre,
+              formatoCantidad(cantidad),
+              categoria.toUpperCase(),
+              formatearFecha(fecha)
+            ]
+            return rows.push(gasto);
+          });
           autoTable(doc,{
             columns: colums,
             body: rows,
-            startY: 140,
+            startY: 160,
             theme: "grid",
             styles: {
               font: "times",
@@ -227,7 +249,7 @@ function App() {
             },
             tableLineColor: [0, 0, 0]
           });
-          doc.save("control-gastos.pdf");
+          doc.save(`control-gastos${formatearFecha(Date.now())}.pdf`);
         }
       });
       
@@ -244,59 +266,71 @@ function App() {
     
   }
   return (
-    <div className={modal ? 'fijar' : ''} id="contenido">
-      <Header
-        gastos={gastos} 
-        setGastos={setGastos}
-        presupuesto={presupuesto}
-        setPresupuesto= {setPresupuesto}
-        isValidPresupuesto={isValidPresupuesto}
-        setIsValidPresupuesto= {setIsValidPresupuesto}
-        presupuestoNuevo={presupuestoNuevo}
-        setPresupuestoNuevo={presupuestoNuevo}
-        presupuestoAhora={presupuestoAhora}
-        setPresupuestoAhora={setPresupuestoAhora}
-      />
-
-      {isValidPresupuesto ? (
+    <>
+      {login === true || login === "true" ? (
         <>
-          <main>
-            <Filtros 
-              filtro={filtro}
-              setFiltro={setFiltro}
-            ></Filtros>
-            <ListadoGastos 
-              gastos={gastos}
-              setGastoEditar={setGastoEditar}
-              eliminarGasto={eliminarGasto}
-              filtro={filtro}
-              gastosFiltro={gastosFiltro}
+          <div className={modal ? 'fijar' : ''} id="contenido">
+            <Header
+              gastos={gastos} 
+              setGastos={setGastos}
+              presupuesto={presupuesto}
+              setPresupuesto= {setPresupuesto}
+              isValidPresupuesto={isValidPresupuesto}
+              setIsValidPresupuesto= {setIsValidPresupuesto}
+              presupuestoNuevo={presupuestoNuevo}
+              setPresupuestoNuevo={presupuestoNuevo}
+              presupuestoAhora={presupuestoAhora}
+              setPresupuestoAhora={setPresupuestoAhora}
+              setLogin={setLogin}
             />
-          </main>
-          <div className='nuevo-gasto'>
-            <img src={IconoGastoNuevo} alt="icono nuevo gasto" onClick={handleNuevoGasto} />
-          </div>
-          <div className='mas-dinero'>
-            <img src={IconoMas} alt="Icono mas dinero" title='Agregar fondos' onClick={handleMasDinero} />
-          </div>
-          <div className='descargar-pdf'>
-            <img src={IconoDescarga} alt="Icono PDF" onClick={()=> handlePDF(gastos,presupuesto)} title="Descargar como PDF"/>
+
+            {isValidPresupuesto ? (
+              <>
+                <main>
+                  <Filtros 
+                    filtro={filtro}
+                    setFiltro={setFiltro}
+                  ></Filtros>
+                  <ListadoGastos 
+                    gastos={gastos}
+                    setGastoEditar={setGastoEditar}
+                    eliminarGasto={eliminarGasto}
+                    filtro={filtro}
+                    gastosFiltro={gastosFiltro}
+                  />
+                </main>
+
+                <div className='nuevo-gasto'>
+                  <img src={IconoGastoNuevo} alt="icono nuevo gasto" onClick={handleNuevoGasto} />
+                </div>
+
+                <div className='mas-dinero'>
+                  <img src={IconoMas} alt="Icono mas dinero" title='Agregar fondos' onClick={handleMasDinero} />
+                </div>
+
+                <div className='descargar-pdf'>
+                  <img src={IconoDescarga} alt="Icono PDF" onClick={()=> handlePDF(gastos,presupuesto)} title="Descargar como PDF"/>
+                </div>
+              </>
+            ) : null}
+
+            {modal && <Modal 
+                          setModal= {setModal} 
+                          animarModal={animarModal}
+                          setAnimarModal={setAnimarModal}
+                          guardarGasto={guardarGasto} 
+                          gastoEditar={gastoEditar}
+                          setGastoEditar={setGastoEditar}
+            />}
+
           </div>
         </>
-      ) : null}
+      ): <InicioSesion setLogin={setLogin}/>}
 
-      {modal && <Modal 
-                    setModal= {setModal} 
-                    animarModal={animarModal}
-                    setAnimarModal={setAnimarModal}
-                    guardarGasto={guardarGasto} 
-                    gastoEditar={gastoEditar}
-                    setGastoEditar={setGastoEditar}
-                    />}
-
-      
-    </div>
-    
+      <footer className='footer'>
+        <p>Todos los derechos reservados &copy; | Diseñado por <span>PG .CODE</span></p>
+      </footer>
+    </>
   )
 }
 

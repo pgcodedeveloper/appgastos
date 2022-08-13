@@ -230,7 +230,7 @@ header h2{
     font-weight: 900;
     color: var(--azul);
 }
-.reset-app {
+.reset-app, .cerrar-app {
     border: none;
     background-color: #db2777;
     padding: 1rem;
@@ -246,7 +246,10 @@ header h2{
     align-items: center;
     justify-content: space-evenly;
 }
-.reset-app:hover {
+.reset-app{
+    margin-top: 1.5rem;
+}
+.reset-app:hover, .cerrar-app:hover {
     background-color: #c71465;
     cursor: pointer;
 }
@@ -255,7 +258,15 @@ header h2{
     width: 4rem;
     margin: 0;
 }
+
+.cerrar-app img{
+    width: 4rem;
+    margin: 0;
+}
 .reset-app img:first-child{
+    margin-bottom: 0;
+}
+.cerrar-app img:first-child{
     margin-bottom: 0;
 }
 
@@ -363,17 +374,17 @@ main {
 
 .nuevo-gasto {
     position: fixed;
-    bottom: 2rem;
+    bottom: 12rem;
     right: 2rem;
 }
 .mas-dinero{
     position: fixed;
-    bottom: 8rem;
+    bottom: 19rem;
     right: 2rem;
 }
 .descargar-pdf{
     position: fixed;
-    bottom: 2rem;
+    bottom: 12rem;
     left: 2rem;
 }
 .mas-dinero img{
@@ -404,6 +415,14 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: hidden;
+    min-height: 120vh
+    
+}
+@media (max-width: 480px) {
+    .modal{
+        min-height: 120vh;
+    }
 }
 .modal .cerrar-modal {
     position: absolute;
@@ -476,4 +495,69 @@ body .modal {
     align-items: center;
     font-size: 2.4rem;
     text-align: right;
+}
+
+
+.contenedor-login{
+    background-color: gray;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10rem;
+}
+@media (min-width: 768px) {
+    .contenedor-login{
+        width: 85%;
+    }
+}
+
+.contenedor-login h1{
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.boton{
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    padding: 2rem 3rem;
+    background-color: rgb(31, 31, 206);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 1rem;
+}
+.boton:hover{
+    background-color: #1048a4;
+}
+
+
+.footer{
+    padding: 2rem 3rem;
+    display: flex;
+    margin-top: 10rem;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    background-color: #3b82f6;
+}
+
+.footer p{
+    color: #f5f5f5;
+    font-size: 1.5rem;
+}
+.footer p span{
+    font-weight: bold;
+    color: black;
+}
+@media (min-width: 768px) {
+    .footer{
+        flex-direction: row;
+    }
 }
