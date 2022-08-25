@@ -1,0 +1,17 @@
+{
+    "name": "Gestion Gastos",
+    "short_name": "App Gastos",
+    "theme_color": "#2196f3",
+    "background_color": "#2196f3",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "./",
+    "start_url": "./",
+    "icons": [
+        {
+            "src": "./src/img/gastos.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
