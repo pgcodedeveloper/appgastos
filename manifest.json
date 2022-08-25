@@ -3,44 +3,44 @@
     "short_name" : "App Gastos",
     "description" : "Aplicación para gestionar tus gastos",
     "start_url" : "./?utm_source=web_app_manifest",
-    "scope" : "./",
+    "scope" : "./dist",
     "display" : "standalone",
     "theme_color": "#3d3d3d",
     "background_color": "#f2f2f2",
     "orientation" : "portrait",
     "icons": [ 
         {
-            "src": "./src/favicon.svg",
+            "src": "./dist/assets/favicon.svg",
             "sizes": "410x404",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_0.svg",
+            "src": "./dist/assets/favicon_0.svg",
             "sizes": "144x144",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_1.svg",
+            "src": "./dist/assets/favicon_1.svg",
             "sizes": "192x192",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_2.svg",
+            "src": "./dist/assets/favicon_2.svg",
             "sizes": "94x94",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_3.svg",
+            "src": "./dist/assets/favicon_3.svg",
             "sizes": "64x64",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_4.svg",
+            "src": "./dist/assets/favicon_4.svg",
             "sizes": "32x32",
             "type": "image/svg"
         },
         {
-            "src": "./src/favicon_5.svg",
+            "src": "./dist/assets/favicon_5.svg",
             "sizes": "16x16",
             "type": "image/svg"
         }
