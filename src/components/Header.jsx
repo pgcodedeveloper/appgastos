@@ -10,14 +10,23 @@ const Header = ({
   gastos,setGastos,
   presupuestoNuevo,
   setPresupuestoNuevo,
+  setPresupuestos,
+  presupuestos,
   presupuestoAhora,
   setPresupuestoAhora,
-  setLogin
+  setLogin,
+  presupuestoEditar,
+  presupuestoEdit,
+  setPresupuestoEdit,
+  editarIngreso,
+  guardarIngreso,
+  usuario
 }) => {
   return (
     <header>
       <h1>Planificador de Gastos</h1>
       <h2>Mes De: {foratearMes(Date.now())}</h2>
+      <p>Bienvenido: {usuario}</p>
       {isValidPresupuesto ? (
             <ControlPresupuesto 
                 presupuesto= {presupuesto}
@@ -26,6 +35,7 @@ const Header = ({
                 setPresupuesto={setPresupuesto}
                 setIsValidPresupuesto={setIsValidPresupuesto}
                 setLogin={setLogin}
+                setPresupuestos={setPresupuestos}
             />
         ): (
         <NuevoPresupuesto
@@ -33,9 +43,16 @@ const Header = ({
             setPresupuesto= {setPresupuesto}
             setIsValidPresupuesto= {setIsValidPresupuesto}
             presupuestoNuevo={presupuestoNuevo}
+            setPresupuestos={setPresupuestos}
             presupuestoAhora={presupuestoAhora}
             setPresupuestoAhora={setPresupuestoAhora}
             setPresupuestoNuevo={setPresupuestoNuevo}
+            presupuestos={presupuestos}
+            presupuestoEditar={presupuestoEditar}
+            presupuestoEdit={presupuestoEdit}
+            setPresupuestoEdit={setPresupuestoEdit}
+            editarIngreso={editarIngreso}
+            guardarIngreso={guardarIngreso}
         />
       )}
       

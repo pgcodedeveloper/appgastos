@@ -4,8 +4,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css';
 import IconoReset from '../img/reset.png';
+import IconoSesion from '../img/cerrar-sesion.png';
 
-const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsValidPresupuesto,setLogin}) => {
+const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsValidPresupuesto,setLogin,setPresupuestos}) => {
 
     const [porcentaje,setPorcentaje] = useState(0);
     const [disponible,setDisponible] = useState(0);
@@ -44,7 +45,8 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsVa
         }).then((res) => {
             if (res.isConfirmed) {
                 setGastos([]);
-                setPresupuesto(0);
+                setPresupuesto([]);
+                setPresupuestos([]);
                 location.reload();
             }
         });
@@ -85,7 +87,7 @@ const ControlPresupuesto = ({presupuesto,gastos,setGastos,setPresupuesto,setIsVa
             <div className='contenido-presupuesto'>
                 <button className='cerrar-app' onClick={handleCerrar} type="button">
                     Cerrar Sesión
-                    <img src={IconoReset} alt="Icono de reiniciar"/>
+                    <img src={IconoSesion} alt="Icono de Cerrar Sesión"/>
                 </button>
                 <button className='reset-app' onClick={handleResetApp} type="button">
                     Reiniciar Presupuesto

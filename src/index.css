@@ -7,6 +7,20 @@
     --negro: #000;
 }
 
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 25px;
+}
+*::-webkit-scrollbar-track {
+    background: rgb(1, 108, 159);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(2, 163, 239);
+    border-radius: 20px;
+}
+
 body {
     font-size: 1.6rem;
     font-family: "Lato", sans-serif;
@@ -20,11 +34,6 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
-}
-
-.fijar {
-    overflow-y: hidden;
-    height: 100vh;
 }
 
 h1 {
@@ -53,6 +62,7 @@ header h1{
     color: var(--blanco);
     text-align: center;
     text-transform: uppercase;
+    text-shadow: #64748b 0.1em 0.1em 0.2em
 }
 header h2{
     padding: 3rem 0;
@@ -60,6 +70,15 @@ header h2{
     color: var(--blanco);
     text-align: center;
     text-transform: uppercase;
+    text-shadow: #64748b 0.1em 0.1em 0.2em
+}
+
+header p{
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: 900;
+    font-style: italic;
 }
 .texto-centrado{
     text-align: center;
@@ -283,6 +302,10 @@ main {
 @media (min-width: 768px) {
     .filtros .campo{
         flex-direction: row;
+        margin-bottom: 2rem;
+    }
+    .filtros .campo:last-of-type{
+        margin-bottom: 0;
     }
 }
 .filtros label {
@@ -310,7 +333,13 @@ main {
     text-align: center;
     font-size: 2.2rem;
 }
-
+.sin-filtro{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #64748b;
+}
 .gasto {
     display: flex;
     flex-direction: column;
@@ -415,7 +444,6 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: hidden;
     min-height: 120vh
     
 }
@@ -455,9 +483,7 @@ main {
 .modal label {
     color: var(--blanco);
 }
-body .modal {
-    overflow: hidden;
-}
+
 
 .modal .formulario.animar {
     position: relative;
@@ -499,10 +525,14 @@ body .modal {
 
 
 .contenedor-login{
-    background-color: gray;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 9px 10px -10px rgba(0, 0, 0, 0.51);
+    -webkit-box-shadow: 0px 9px 10px -10px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: 0px 9px 10px -10px rgba(0, 0, 0, 0.51);
+    background-color: var(--blanco);
+    border-radius: 1.2rem;
     margin-top: 2rem;
     padding: 2rem;
-    border-radius: 2rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -560,4 +590,98 @@ body .modal {
     .footer{
         flex-direction: row;
     }
+}
+
+.contenedor-paginas{
+    margin: 0 auto;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.contenedor-paginas p{
+    color: var(--gris-oscuro);
+    font-weight: 700;
+}
+
+.contenedor-botones{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.botones{
+    border: none;
+    padding: 1rem 2.5rem;
+    background-color: #3b82f6;
+    border-radius: 1.5rem;
+    color: white;
+    font-weight: 700;
+    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+.botonSig:hover{
+    transform: translateX(2.5rem);
+}
+
+.botonAnt:hover{
+    transform: translateX(-2.5rem);
+}
+
+.formulario-login{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    padding: 1rem;
+}
+.formulario-login legend{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #042a67;
+    font-style: italic;
+}
+.campo-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+    gap: 1.5rem;
+    width: 80%;
+    transition: all .1s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.campo-login input{
+    width: 80%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background-color: transparent;
+    color: #042a67;
+    border-bottom: solid 3px black;
+}
+
+.campo-login input::placeholder{
+    color: #64748b;
+}
+
+.campo-login input:hover{
+    background-color: #94a3b8;
+}
+
+.campo-login label{
+    width: 80%;
+    text-align: left;
+    font-weight: 600;
+    font-size: 2rem;
+    color: black; text-shadow: #64748b 0.1em 0.1em 0.2em
+}
+
+.campo-login label:last-of-type{
+    margin-top: 2.5rem;
+}
+
+.campo-login:last-of-type{
+    margin-bottom: 5rem;
 }

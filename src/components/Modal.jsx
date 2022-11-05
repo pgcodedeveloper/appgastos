@@ -21,9 +21,12 @@ const Modal = ({setModal, animarModal, setAnimarModal,guardarGasto,gastoEditar,s
     },[])
 
     const ocultarModal = () =>{
+        const body = document.body;
+        window.scrollTo(0,0);
         setAnimarModal(false);
         setGastoEditar({});
         setTimeout(() => {
+            body.style.overflowY='scroll';
             setModal(false);
         }, 300);
     }
