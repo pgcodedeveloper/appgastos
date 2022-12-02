@@ -10,7 +10,7 @@ import {
 import 'react-swipeable-list/dist/styles.css'
 import { formatearFecha } from '../helpers';
 const Ingreso = ({presupuesto,setPresupuestoEdit,eliminarIngreso}) => {
-    const {valor,fecha} = presupuesto;
+    const {valor,descripcion,fecha} = presupuesto;
 
     const leadingActions = () => (
         <LeadingActions>
@@ -38,7 +38,7 @@ const Ingreso = ({presupuesto,setPresupuestoEdit,eliminarIngreso}) => {
                     <div className='contenido-gasto'>
                         <img src={dinero} alt="Icono del gasto" />
                         <div className='descripcion-gasto'>
-                            <p className='nombre-gasto'>Ingreso</p>
+                            <p className='nombre-gasto'>{descripcion}</p>
                             <p className='fecha-gasto'>
                                 Agregado el:
                                 <span> {formatearFecha(fecha)}</span>

@@ -6,7 +6,7 @@ import ListadoGastos from './components/ListadoGastos';
 import Filtros from './components/Filtros';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { foratearMes, generarID, formatoCantidad, formatearFecha } from './helpers';
+import { foratearMes, generarID, formatoCantidad, formatearFecha, formatearAno } from './helpers';
 import swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css';
 import IconoGastoNuevo from './img/nuevo-gasto.svg'
@@ -279,13 +279,14 @@ function App() {
             tableLineColor: [0, 0, 0]
           });
           
-          const colums3 = ["Tipo","Valor del Ingreso","Fecha del Ingreso"];
+          const colums3 = ["Tipo","Nombre del Ingreso","Valor del Ingreso","Fecha del Ingreso"];
           const rows3= [];
           let ingreso = [];
           presupuestos.map(pres =>{
-            const {valor,fecha} = pres;
+            const {valor,descripcion,fecha} = pres;
             ingreso = [
               "INGRESO",
+              descripcion.toUpperCase(),
               formatoCantidad(valor),
               formatearFecha(fecha)
             ]
@@ -472,7 +473,7 @@ function App() {
       ): <InicioSesion setLogin={setLogin} setEmail={setEmail} setUsuario={setUsuario}/>}
 
       <footer className='footer'>
-        <p>Todos los derechos reservados &copy; | Diseñado por <span>PG .CODE</span></p>
+        <p>Todos los derechos reservados &copy; {formatearAno(Date.now())} | Diseñado por <a href='https://pgcodedeveloper.netlify.app/' target='_blanck'>PG .CODE</a></p>
       </footer>
     </>
   )

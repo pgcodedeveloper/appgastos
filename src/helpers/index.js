@@ -16,6 +16,14 @@ export const formatearFecha = fecha =>{
     return fechaN.toLocaleDateString('es-ES',opciones);
 }
 
+export const formatearAno= fecha =>{
+    const fechaN= new Date(fecha);
+    const opciones={
+        year: 'numeric'
+    }
+    return fechaN.toLocaleDateString('es-ES',opciones);
+}
+
 export const foratearMes= fecha =>{
     const fechaN= new Date(fecha);
     const op= {
