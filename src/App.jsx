@@ -17,6 +17,7 @@ import InicioSesion from './components/InicioSesion';
 import ListadoIngresos from './components/ListadoIngresos';
 
 
+
 function App() {
 
   const [presupuesto, setPresupuesto] = useState(Number(localStorage.getItem('presupuesto')) ?? 0);
@@ -42,7 +43,7 @@ function App() {
   const [usuario,setUsuario]= useState(datoUsuario ?? 'Usuario');
   const [email,setEmail]= useState(datoEmail ?? 'Email');
   
-  
+
   useEffect( () =>{
     const body= document.body;
     if(Object.keys(gastoEditar).length > 0){
@@ -370,6 +371,73 @@ function App() {
             tableLineColor: [0, 0, 0]
           });
 
+          const colums4 = ["Nombre de la categoría","Total gastado en la categoría"];
+          let totalA = 0,totalC =0,totalCo = 0,totalG = 0,totalO = 0,totalS = 0,totalSc = 0;
+          gastos.map(gasto =>{
+            if(gasto.categoria === "ahorro"){
+              totalA = Number(gasto.cantidad) + totalA;
+            }
+            else if(gasto.categoria === "comida"){
+              totalCo = Number(gasto.cantidad) + totalCo;
+            }
+            else if(gasto.categoria === "casa"){
+              totalC = Number(gasto.cantidad) + totalC;
+            }
+            else if(gasto.categoria === "gastos"){
+              totalG = Number(gasto.cantidad) + totalG;
+            }
+            else if(gasto.categoria === "ocio"){
+              totalO = Number(gasto.cantidad) + totalO;
+            }
+            else if(gasto.categoria === "salud"){
+              totalS = Number(gasto.cantidad) + totalS;
+            }
+            else{
+              totalSc = Number(gasto.cantidad) + totalSc;
+            }
+          });
+          let row4 = [
+            ["AHORRO",formatoCantidad(totalA)],
+            ["COMIDA",formatoCantidad(totalCo)],
+            ["CASA",formatoCantidad(totalC)],
+            ["GASTOS VARIOS",formatoCantidad(totalG)],
+            ["OCIO", formatoCantidad(totalO)],
+            ["SALUD",formatoCantidad(totalS)],
+            ["SUSCRIPCIONES",formatoCantidad(totalSc)],
+          ];
+
+          autoTable(doc,{
+            columns: colums4,
+            body: row4,
+            theme: "grid",
+            styles: {
+              font: "times",
+              halign: "center",
+              cellPadding: 3.5,
+              lineWidth: 0.5,
+              lineColor: [0, 0, 0],
+              textColor: [0, 0, 0]
+            },
+            headStyles: {
+              textColor: [0, 0, 0],
+              fontStyle: "normal",
+              lineWidth: 0.5,
+              lineColor: [0, 0, 0],
+              fillColor: [166, 204, 247]
+            },
+            alternateRowStyles: {
+              fillColor: [212, 212, 212],
+              textColor: [0, 0, 0],
+              lineWidth: 0.5,
+              lineColor: [0, 0, 0]
+            },
+            rowStyles: {
+              lineWidth: 0.5,
+              lineColor: [0, 0, 0]
+            },
+            tableLineColor: [0, 0, 0]
+          });
+
           imagen.onload = () =>{
             doc.save(`control-gastos${formatearFecha(Date.now())}.pdf`);
           }
@@ -446,15 +514,15 @@ function App() {
                 </main>
 
                 <div className='nuevo-gasto'>
-                  <img src={IconoGastoNuevo} alt="icono nuevo gasto" onClick={handleNuevoGasto} />
+                  <i className="fa-solid fa-circle-plus" onClick={handleNuevoGasto}></i>
                 </div>
 
                 <div className='mas-dinero'>
-                  <img src={IconoMas} alt="Icono mas dinero" title='Agregar fondos' onClick={handleMasDinero} />
+                  <i className="fa-solid fa-sack-dollar" title='Agregar fondos' onClick={handleMasDinero}></i>
                 </div>
 
                 <div className='descargar-pdf'>
-                  <img src={IconoDescarga} alt="Icono PDF" onClick={()=> handlePDF(gastos,presupuesto)} title="Descargar como PDF"/>
+                  <i className="fa-solid fa-file-pdf" title="Descargar como PDF" onClick={()=> handlePDF(gastos,presupuesto)}></i>
                 </div>
               </>
             ) : null}
